@@ -28,13 +28,9 @@ export const Schema = z.object({
    */
   pollInterval: z.number().int().positive().default(20),
   /**
-   * Telegram bot token
+   * Slack webhook URL
    */
-  telegramBotToken: z.string(),
-  /**
-   * Telegram channel ID
-   */
-  telegramChannelId: z.string(),
+  slackWebhookUrl: z.string(),
   /**
    * Prefixed safe addresses to watch, e.g. `eth:0x11111`
    */
