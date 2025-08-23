@@ -120,10 +120,7 @@ function parseTxId(id: TxID): ParsedTxId {
 }
 
 const CHAIN_IDS: Record<string, number> = {
-  arb1: 42161,
-  eth: 1,
-  gor: 5,
-  oeth: 10,
+  camp: 484
 };
 
 function normalizeLisited(tx: ListedTx): ListedSafeTx {
@@ -182,7 +179,7 @@ export class AltAPI extends BaseApi implements ISafeAPI {
   async #fetchList(url?: string | null): Promise<ListTransactionsResp> {
     try {
       const u =
-        url ?? `${this.apiURL}/safes/${this.address}/multisig-transactions`;
+        url ?? `${this.apiURL}/api/v2/safes/${this.address}/multisig-transactions`;
       const resp: ListTransactionsResp = await this.fetch(u);
       return resp;
     } catch (e) {
@@ -194,7 +191,7 @@ export class AltAPI extends BaseApi implements ISafeAPI {
   async #fetchOne(safeTxHash: Hash): Promise<Transaction> {
     this.logger.debug(`loading tx ${safeTxHash}`);
     const data: Transaction = await this.fetch(
-      `${this.apiURL}/transactions/${safeTxHash}`,
+      `${this.apiURL}/api/v2/safes/multisig-transactions/${safeTxHash}`,
     );
     this.logger.debug(`loaded tx ${safeTxHash}`);
     return data;
@@ -208,7 +205,5 @@ export class AltAPI extends BaseApi implements ISafeAPI {
     return chainId;
   }
 
-  private get apiURL(): string {
-    return `https://safe-client.safe.global/v1/chains/${this.chainId}`;
-  }
+  private readonly apiURL = "https://safe-transaction-camp.onchainden.com";
 }

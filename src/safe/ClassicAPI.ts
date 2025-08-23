@@ -91,10 +91,7 @@ function normalizeDetailed(tx: SafeMultisigTransaction): SafeTx<Address> {
 }
 
 const APIS: Record<string, string> = {
-  arb1: "https://safe-transaction-arbitrum.safe.global",
-  eth: "https://safe-transaction-mainnet.safe.global",
-  gor: "https://safe-transaction-goerli.safe.global",
-  oeth: "https://safe-transaction-optimism.safe.global",
+  camp: "https://safe-transaction-camp.onchainden.com"
 };
 
 export class ClassicAPI extends BaseApi implements ISafeAPI {
@@ -136,13 +133,13 @@ export class ClassicAPI extends BaseApi implements ISafeAPI {
   async #fetchMany(url?: string | null): Promise<SafeMultisigTransactionData> {
     const u =
       url ??
-      `${this.apiURL}/api/v1/safes/${this.address}/multisig-transactions/`;
+      `${this.apiURL}/api/v2/safes/${this.address}/multisig-transactions/`;
     const data = await this.fetch(u);
     return data;
   }
 
   async #fetchOne(safeTxHash: Hash): Promise<SafeMultisigTransaction> {
-    const url = `${this.apiURL}/api/v1/safes/${this.address}/multisig-transactions/${safeTxHash}`;
+    const url = `${this.apiURL}/api/v2/safes/multisig-transactions/${safeTxHash}`;
     const data = await this.fetch(url);
     return data;
   }
