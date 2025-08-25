@@ -29,6 +29,5 @@ config.local.yaml
 .eslintcache
 .eslint.local.json
 *.generated.ts
-config.yaml
 # Optimistic output
 /output
