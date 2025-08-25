@@ -1,40 +1,31 @@
-# Stage 1: Builder
+# Stage 1: Builder (full Node.js)
 FROM node:20-alpine AS builder
 
 WORKDIR /app
 
-# Copy package files and install all deps
+# Copy package files and install all dependencies
 COPY package*.json ./
 RUN npm install
 
-# Copy source code
+# Copy all source code
 COPY . .
 
 # Build the project
 RUN npm run build
 
-# Stage 2: Production
-FROM node:20-alpine
+# Stage 2: Production (distroless)
+FROM gcr.io/distroless/nodejs22-debian12
 
+USER 1000:1000
 WORKDIR /app
 
-# Copy compiled output from builder
-COPY --from=builder /app/dist ./dist
-
-# Copy config file
-COPY config.yaml ./config.yaml
-
-# Copy package.json (needed for npm install --omit=dev)
-COPY package*.json ./
-
-# Skip Husky hooks for production install
-ENV HUSKY_SKIP_INSTALL=1
-
-# Install only production dependencies
-RUN npm install --omit=dev
-
-# Set NODE_ENV
 ENV NODE_ENV=production
+ARG PACKAGE_VERSION
+LABEL org.opencontainers.image.version="${PACKAGE_VERSION}"
+
+# Copy compiled output and config
+COPY --from=builder /app/dist /app/dist
+COPY --from=builder /app/config.yaml /app/config.yaml
 
 # Start the app
-CMD ["node", "dist/index.mjs"]
+CMD ["/app/dist/index.mjs"]
