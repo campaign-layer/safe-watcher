@@ -119,10 +119,6 @@ function parseTxId(id: TxID): ParsedTxId {
   return { multisig: multisig as Address, safeTxHash: safeTxHash as Hash };
 }
 
-const CHAIN_IDS: Record<string, number> = {
-  camp: 484
-};
-
 function normalizeLisited(tx: ListedTx): ListedSafeTx {
   const { safeTxHash } = parseTxId(tx.id);
   return {
@@ -195,14 +191,6 @@ export class AltAPI extends BaseApi implements ISafeAPI {
     );
     this.logger.debug(`loaded tx ${safeTxHash}`);
     return data;
-  }
-
-  private get chainId(): number {
-    const chainId = CHAIN_IDS[this.prefix];
-    if (!chainId) {
-      throw new Error(`no chain id for prefix '${this.prefix}'`);
-    }
-    return chainId;
   }
 
   private readonly apiURL = "https://safe-transaction-camp.onchainden.com";

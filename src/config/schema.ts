@@ -22,7 +22,7 @@ export const Schema = z.object({
   /**
    * URL of the Safe web app to generate links in notifications
    */
-  safeURL: z.string().url().default("https://app.safe.global"),
+  safeURL: z.string().url().default("https://safe.onchainden.com"),
   /**
    * Polling interval in seconds
    */
