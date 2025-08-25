@@ -34,8 +34,7 @@ export class Slack implements INotifier {
 
   #getMessage(event: Event): string {
     const { type, chainPrefix, safe, tx } = event;
-
-    const link = `<${this.#safeURL}/${chainPrefix}:${safe}/transactions/queue|🔗 transaction>`;
+    const link = `<${this.#safeURL}safe=${chainPrefix}:${safe}/&id=multisig_${safe}_${tx.safeTxHash}|🔗 transaction>`;
     const proposer = `*Proposed by:* ${printSigner(tx.proposer)}`;
     let confirmations = tx.confirmations.map(printSigner).join(", ");
     confirmations = `*Signed by:* ${confirmations}`;
