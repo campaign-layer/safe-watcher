@@ -1,5 +1,5 @@
-telegramBotToken: "8201370318:AAER_m0JD06BFPtGsKqi7-lV326wmbWwQww"
-telegramChannelId: "-4614692641"
+telegramBotToken: ${TELEGRAM_BOT_TOKEN}
+telegramChannelId: ${TELEGRAM_CHANNEL_ID}
 safeAddresses:
   - "camp:0xaD3fb175BB0DD74F58fe0c1B7AAAA26Deb57a9aa"
 signers:
