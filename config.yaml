@@ -1,6 +1,6 @@
 slackWebhookUrl: "https://hooks.slack.com/services/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"
 telegramBotToken: "8482795146:AAFOyvQKaUY5X9GOvVSBCaZ900zZ5BmY75k"
-telegramChannelId: "795692420"
+telegramChannelId: "-4856007664"
 safeAddresses:
   - "camp:0x534Cd83D99Af086b8CbD54667447681e54abCe52"
 signers:
